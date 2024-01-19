@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('sonarqube scan') {
             steps {
-                sh 'mvn sonar:sonar' // Run SonarQube analysis using Maven
+                sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PrinceN09_week16-code' // Run SonarQube analysis using Maven
             }
         }
 
