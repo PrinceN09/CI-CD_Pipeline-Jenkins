@@ -1,18 +1,22 @@
 pipeline {
     agent any
-    tools{
-        maven 'M2_HOME'
+    
+    tools {
+        maven 'M2_HOME' // Use the Maven tool configured with the label 'M2_HOME'
     }
-     stage ('sonarqube scan'){
-            steps{
-                sh 'mvn sonar:sonar'
+
+    stages {
+        stage('sonarqube scan') {
+            steps {
+                sh 'mvn sonar:sonar' // Run SonarQube analysis using Maven
             }
         }
-    stages{
-        stage ('all maven commands'){
-            steps{
+
+        stage('all maven commands') {
+            steps {
+                // Run various Maven commands: clean, test, compile, install, package
                 sh 'mvn clean test compile install package'
             }
-        } 
+        }
     }
 }
