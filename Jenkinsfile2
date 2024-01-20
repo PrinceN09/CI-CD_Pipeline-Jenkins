@@ -8,10 +8,12 @@ pipeline {
     stages {
         stage('sonarqube scan') {
             steps {
-                withSonarQubeEnv(SonarqubeID){
-                sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PrinceN09_week16-code' // Run SonarQube analysis using Maven
+                script {
+                    withSonarQubeEnv('SonarqubeID') {
+                        sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PrinceN09_week16-code'
+                    }
+                }
             }
-          }
         }
 
         stage('all maven commands') {
