@@ -16,7 +16,7 @@
 	<packaging>jar</packaging>
 	<properties>
 	<sonar.scanner.force-deprecated-java-version>true</sonar.scanner.force-deprecated-java-version>	
-  <sonar.organization>geolocation</sonar.organization>
+  <sonar.organization>princen09</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
 <dependencies>
