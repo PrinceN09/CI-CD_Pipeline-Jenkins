@@ -1,13 +1,12 @@
 pipeline {
-    agent any
+    agent { docker { image 'maven:3-amazoncorretto-17-debian' } }
     
     tools {
-        maven 'M2_HOME' // Use the Maven tool configured with the label 'M2_HOME'
+        maven 'Maven' // Use the Maven tool configured with the label 'Maven'
     }
 
     stages {
-        stage('sonarqube scan') {
-        agent {docker { image 'maven:3-amazoncorretto-17-debian' }}
+        stage('SonarQube Scan') {
             steps {
                 script {
                     withSonarQubeEnv('SonarqubeID') {
@@ -17,17 +16,19 @@ pipeline {
             }
         }
 
-        stage('all maven commands') {
+        stage('All Maven Commands') {
             steps {
-                // Run various Maven commands: clean, test, compile, install, package
-                sh 'mvn clean test compile install package'
+                dir('your_project_directory') {
+                    // Run various Maven commands: clean, test, compile, install, package
+                    sh 'mvn clean test compile install package'
+                }
             }
         }
-         stage('upload artifact'){
+
+        stage('Upload Artifact') {
             steps{
-                 
-                sh 'curl -uadmin:AP5mZ1TGxbfJg5s8o7m1rRSRP4i -T \
-                target/bio*.jar \
+                sh 'curl -u admin:AP5mZ1TGxbfJg5s8o7m1rRSRP4i -T \
+                your_project_directory/target/bio*.jar \
                 "http://35.173.177.111:8081/artifactory/geoapp/"'
             }
         }
